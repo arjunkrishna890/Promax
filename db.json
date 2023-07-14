@@ -1,0 +1,63 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "admin",
+      "role": "admin"
+    },
+    {
+      "id": 2,
+      "username": "teamlead",
+      "password": "teamlead",
+      "role": "teamlead"
+    },
+    {
+      "id": 3,
+      "username": "employee",
+      "password": "employee",
+      "role": "employee"
+    }
+  ],
+  "projects": [
+    {
+      "projectName": "A",
+      "assignedTeamLead": "hrtk",
+      "id": 1
+    },
+    {
+      "projectName": "A",
+      "assignedTeamLead": "hrtk",
+      "id": 2
+    },
+    {
+      "projectName": "A",
+      "assignedTeamLead": "BC",
+      "id": 3
+    },
+    {
+      "projectName": "bac",
+      "assignedTeamLead": "hrtk",
+      "id": 4
+    },
+    {
+      "projectName": "New",
+      "assignedTeamLead": "hrtk",
+      "id": 5
+    }
+  ],
+  "tasks": [
+    {
+      "taskName": "wd",
+      "assignedEmployee": "qwd",
+      "projectId": "undefined",
+      "id": 1
+    },
+    {
+      "taskName": "one1",
+      "assignedEmployee": "emp1",
+      "projectId": "undefined",
+      "id": 2
+    }
+  ]
+}
