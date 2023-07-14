@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react";
 
 function App() {
   const [user, setUser] = useState(null);
+  const [userlist,setuserlist] = useState([]);
   const [projects, setProjects] = useState([]);
 
   const handleLogin = (username, password) => {
-    // Send login request to the server
+
     fetch("http://localhost:8000/users")
       .then((response) => response.json())
       .then((data) => {
+        setuserlist(data)
         const loggedInUser = data.find(
           (user) => user.username === username && user.password === password
         );
@@ -22,7 +24,7 @@ function App() {
   };
 
   const handleTaskCreate = (projectID, taskName, assignedEmployee) => {
-    // Send task creation request to the server
+
     fetch(`http://localhost:8000/projects/${projectID}/tasks`, {
       method: "POST",
       headers: {
@@ -40,8 +42,9 @@ function App() {
       .catch((error) => console.error("Error:", error));
   };
 
+
   const handleProjectCreate = (projectName, assignedTeamLead) => {
-    // Send project creation request to the server
+
     fetch("http://localhost:8000/projects", {
       method: "POST",
       headers: {
@@ -60,7 +63,7 @@ function App() {
   };
 
   useEffect(() => {
-    // Fetch projects from the server
+
     fetch("http://localhost:8000/projects")
       .then((response) => response.json())
       .then((data) => {
@@ -102,6 +105,7 @@ function App() {
     return (
       <div>
         <h1>Create Project</h1>
+        {console.log(userlist)}
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -116,12 +120,22 @@ function App() {
             placeholder="Project Name"
             required
           />
+
           <input
             type="text"
             name="assignedTeamLead"
             placeholder="Assigned Team Lead"
             required
           />
+          <select >
+          <option value="">Select an option</option>
+            {userlist.map((userl)=>(
+              userl.role ==="teamlead"?( <option value="">{userl.username}</option>):("")
+           
+            ))}
+       
+       
+      </select>
           <button type="submit">Create Project</button>
         </form>
       </div>
@@ -132,6 +146,7 @@ function App() {
     return (
       <div>
         <h1>Projects</h1>
+        {console.log(user)}
         {projects.map((project) => (
           <div key={project.projectID}>
             <h2>{project.projectName}</h2>
@@ -148,7 +163,7 @@ function App() {
                   const taskName = e.target.taskName.value;
                   const assignedEmployee = e.target.assignedEmployee.value;
                   handleTaskCreate(
-                    project.projectID,
+                    project.id,
                     taskName,
                     assignedEmployee
                   );
